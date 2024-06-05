@@ -6,20 +6,116 @@
 }
 
 body{
-    background: #222;
-}
+    background: linear-gradient(135deg,#00faba,#5b5b5b);
+}  
+
+
+/* ================================ THIS FOR WEB BROWSER ============================= */
+
 
 .card{
-    width: 90%;
+    width: 80%;
     max-width: 470px;
-    background: linear-gradient(135deg,#00faba,#5b5b5b);
+    background: white;
+    /* linear-gradient(135deg,#00faba,#5b5b5b) */
     color: #fff;
-    margin: 100px auto 0;
+    margin: 15px auto 0;
     border-radius: 20px;
-    padding: 45px 35px;
+    padding: 40px 35px;
     text-align: center;
 }
 
-.saerch{
-    
+.saerch input{
+    border: 0;
+    outline: 0;
+    background: linear-gradient(135deg ,white,black);    
+    padding: 10px 50px;
+    height: 60px;
+    border-radius: 30px;
+    flex: 1;
+    margin-right: 16px;
+    font-size: 18px;
+    position: relative;
+    top: -20px;
+}
+
+.saerch button{
+    border: 0;
+    outline: 0;
+    background: linear-gradient(135deg ,white,black);
+    border-radius: 20px;
+    width: 40px;
+    height: 40px;
+    color: white;
+    font-size: large;
+    cursor: pointer;
+    position: relative;
+    top: -20px;
+
+}
+
+.saerch button i{
+    width: 30px;
+    font-size: larger;
+}
+
+.weather{
+    position: relative;
+    top: 10px;
+}
+
+.weather-icon{
+    width: 400px;
+    height: 200px;
+    position: relative;
+    top: -5px;
+    /* border: 1px solid black; */
+    /* border-radius: 100px; */
+    border-bottom-left-radius: 100px;
+    border-top-right-radius: 100px;
+}
+
+.tem{
+    font-size: 60px;
+    color: black;
+    position: absolute;
+    top: 55%;
+    left: 34%;
+
+}
+
+.city{
+    color: black;
+    position: absolute;
+    top: 70%;
+    left: 35%;
+}
+
+.detais{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 30px;
+    margin-top: 120px;
+}
+div p{
+    color: black;
+}
+
+.col{
+    display: flex;
+    align-items: center;
+    text-align: left;
+}
+
+.col video{
+    width: 60px;
+    height: 60px;
+    margin-right: 10px;
+    background: linear-gradient(135deg,black,red);
+}
+
+.humidity,.wind{
+    font-size: 28px;
+    margin-top: -6px;
 }
