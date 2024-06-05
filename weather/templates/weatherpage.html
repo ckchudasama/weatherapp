@@ -10,11 +10,42 @@
 </head>
 <body>
     <div class="card">
+
         <div class="saerch">        
             <input type="text" placeholder="enter the city name" spellcheck="false"> 
             <button><i class="fa-solid fa-magnifying-glass"></i></button>
 
         </div>
+
+        <div class="weather">
+
+            <video src="{% static 'wind.mp4' %}" class="weather-icon" autoplay muted loop preload="auto"></video>
+            <h1 class="tem">22°C</h1>
+            <h2 class="city">New Your</h2>
+            <div class="detais">
+
+                <div class="col">                    
+                    <video src="{% static 'humidity.mp4' %}" autoplay muted loop preload="auto" width="70px" height="70px"></video>
+                    <div>
+                    <div>
+                        <p class="humidity">50%</p>
+                        <p>humidity</p>
+                    </div>
+                </div>
+                
+                <div class="col">        
+                    <video src="{% static 'windmill.mp4' %}" autoplay muted loop preload="auto" width="70px" height="70px"></video>
+                    <div>
+                        <p class="wind">15 km/h</p>
+                        <p>wind speed</p>
+                    </div>
+                </div>
+
+
+            </div>
+
+        </div>        
+
     </div>
 </body>
 </html>
