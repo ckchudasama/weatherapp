@@ -1,107 +1,109 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'weather.css' %}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>Weather App</title>
 </head>
+
 <body>
     <div class="card">
 
-        <div class="search">        
-            <input type="text" placeholder="enter the city name" spellcheck="false"> 
+        <div class="search">
+            <input type="text" placeholder="enter the city name" spellcheck="false">
             <button><i class="fa-solid fa-magnifying-glass"></i></button>
-
         </div>
 
-        <div class="weather">
 
-            <video src="{% static 'hello dong.mp4' %}" class="weather-icon" autoplay muted loop preload="auto"></video>
-            <h1 class="tem">0°C</h1>
-            <h2 class="city">City</h2>
+        <video src="{% static 'hello dong.mp4' %}" class="weather-video" autoplay muted loop preload="auto"></video>
+
+        <h1 class="tem">0°C</h1>
+        <h2 class="city">City</h2>
+       
             <div class="detais">
+                <div class="col">
+                    <video src="{% static 'humidity.mp4' %}" autoplay muted loop preload="auto" width="70px"
+                        height="70px"></video>
+                    <div>
+                        <div>
+                            <p class="humidity">0%</p>
+                            <p>humidity</p>
+                        </div>
+                    </div>
 
-                <div class="col">                    
-                    <video src="{% static 'humidity.mp4' %}" autoplay muted loop preload="auto" width="70px" height="70px"></video>
-                    <div>
-                    <div>
-                        <p class="humidity">0%</p>
-                        <p>humidity</p>
+                    <div class="col">
+                        <video src="{% static 'windmill.mp4' %}" autoplay muted loop preload="auto" width="70px"
+                            height="70px"></video>
+                        <div>
+                            <p class="wind">0 km/h</p>
+                            <p>wind speed</p>
+                        </div>
                     </div>
                 </div>
-                
-                <div class="col">        
-                    <video src="{% static 'windmill.mp4' %}" autoplay muted loop preload="auto" width="70px" height="70px"></video>
-                    <div>
-                        <p class="wind">0 km/h</p>
-                        <p>wind speed</p>
-                    </div>
-                </div>
+            
+        </div>
+
+        <script>
+
+            const apikey = "e6c1aa13a696e85e47c2b2d6038555b0";
+            const apiurl = "https://api.openweathermap.org/data/2.5/weather?units=metric&q=";
+
+            const saerchbox = document.querySelector(" .search input");
+            const saerchbtn = document.querySelector(" .search button");
+            const weatherIcon = document.querySelector(" .weather-video");
 
 
-            </div>
+            async function checkweather(city) {
+                const response = await fetch(apiurl + city + '&appid=e6c1aa13a696e85e47c2b2d6038555b0');
+                var data = await response.json();
 
-        </div>        
+                console.log(data);
 
-    </div>
+                document.querySelector(".city").innerHTML = data.name;
+                document.querySelector(".tem").innerHTML = Math.round(data.main.temp) + "°C";
+                document.querySelector(".humidity").innerHTML = data.main.humidity + "%";
+                document.querySelector(".wind").innerHTML = data.wind.speed + "km/h";
 
-    <script>
+                if (data.weather[0].main == "Clear") {
+                    weatherIcon.src = "{% static 'clear weather.mp4' %}";
+                }
 
-        const apikey="e6c1aa13a696e85e47c2b2d6038555b0";
-        const apiurl="https://api.openweathermap.org/data/2.5/weather?units=metric&q=";
+                else if (data.weather[0].main == "Haze") {
+                    weatherIcon.src = "{% static 'mist weather.mp4' %}";
+                }
 
-        const saerchbox = document.querySelector(" .search input");
-        const saerchbtn = document.querySelector(" .search button");
-        const weatherIcon = document.querySelector(" .weather-icon");
+                else if (data.weather[0].main == "Rain") {
+                    weatherIcon.src = "{% static 'rain weather.mp4' %}";
+                }
+
+                else if (data.weather[0].main == "Drizzle") {
+                    weatherIcon.src = "{% static 'drezzie weather.mp4' %}";
+                }
+
+                else if (data.weather[0].main == "Clouds") {
+                    weatherIcon.src = "{% static 'clouds.mp4' %}";
+                }
+
+                else if (data.weather[0].main == "Mist") {
+                    weatherIcon.src = "{% static 'mist weather.mp4' %}";
+                }
+
+            }
+
+            saerchbtn.addEventListener("click", () => {
+                checkweather(saerchbox.value);
+
+            })
 
 
-        async function checkweather(city){
-            const response=await fetch(apiurl + city +'&appid=e6c1aa13a696e85e47c2b2d6038555b0' );
-            var data=await response.json();   
-
-            console.log(data);
-
-            document.querySelector(".city").innerHTML=data.name;
-            document.querySelector(".tem").innerHTML=Math.round(data.main.temp)+"°C";
-            document.querySelector(".humidity").innerHTML=data.main.humidity + "%";
-            document.querySelector(".wind").innerHTML=data.wind.speed + "km/h";
-
-           if(data.weather[0].main == "Clear"){
-            weatherIcon.src = "{% static 'clear weather.mp4' %}";
-           }
-
-           else if(data.weather[0].main == "Haze"){
-            weatherIcon.src = "{% static 'mist weather.mp4' %}";
-           }
-
-            else if(data.weather[0].main == "Rain"){
-            weatherIcon.src = "{% static 'rain weather.mp4' %}";
-           }
-
-           else if(data.weather[0].main == "Drizzle"){
-            weatherIcon.src = "{% static 'drezzie weather.mp4' %}";
-           }
-
-           else if(data.weather[0].main == "Clouds"){
-            weatherIcon.src = "{% static 'clouds.mp4' %}";
-           }
-
-           else if(data.weather[0].main == "Mist"){
-            weatherIcon.src = "{% static 'mist weather.mp4' %}";
-           }
-        
-        }
-
-        saerchbtn.addEventListener("click", ()=>{
-            checkweather(saerchbox.value);
-
-        })
-               
-
-    </script>
+        </script>
 
 </body>
+
 </html>
